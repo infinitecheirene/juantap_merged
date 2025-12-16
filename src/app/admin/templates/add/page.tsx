@@ -264,7 +264,7 @@ export default function AddTemplatePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="name">Template Name</Label>
+                  <Label className="mb-1" htmlFor="name">Template Name</Label>
                   <Input
                     id="name"
                     value={template.name}
@@ -273,7 +273,7 @@ export default function AddTemplatePage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="slug">Slug (auto-generated)</Label>
+                  <Label className="mb-1" htmlFor="slug">Slug (auto-generated)</Label>
                   <Input
                     id="slug"
                     value={template.slug}
@@ -282,7 +282,7 @@ export default function AddTemplatePage() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="description">Description</Label>
+                  <Label className="mb-1" htmlFor="description">Description</Label>
                   <Textarea
                     id="description"
                     value={template.description}
@@ -294,7 +294,7 @@ export default function AddTemplatePage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="category">Category</Label>
+                    <Label className="mb-1" htmlFor="category">Category</Label>
                     <Select
                       value={template.category}
                       onValueChange={(value) => {
@@ -312,7 +312,7 @@ export default function AddTemplatePage() {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="layout">Layout</Label>
+                    <Label className="mb-1" htmlFor="layout">Layout</Label>
                     <Select
                       value={template.layout}
                       onValueChange={(value) => updateTemplate("layout", value)}
@@ -335,7 +335,7 @@ export default function AddTemplatePage() {
                 {template.category === "premium" && (
                   <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="price">Price (auto-calculated)</Label>
+                      <Label className="mb-1" htmlFor="price">Price (auto-calculated)</Label>
                       <Input
                         id="price"
                         type="number"
@@ -345,7 +345,7 @@ export default function AddTemplatePage() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="original_price">Original Price</Label>
+                      <Label className="mb-1" htmlFor="original_price">Original Price</Label>
                       <Input
                         id="original_price"
                         type="number"

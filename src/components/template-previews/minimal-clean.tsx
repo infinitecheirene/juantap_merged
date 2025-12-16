@@ -172,7 +172,7 @@ export function MinimalClean() {
 
   return (
     <div
-      className="w-full flex justify-center p-6"
+      className="w-full flex justify-center p-5"
       style={{
         background: backgroundColor,
         color: textColor,

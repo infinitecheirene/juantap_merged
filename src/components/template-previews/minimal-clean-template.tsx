@@ -135,7 +135,7 @@ export function MinimalClean({
 
   return (
     <div
-      className="w-full flex justify-center p-6"
+      className="w-full flex justify-center"
       style={{ backgroundColor: "#f9fafb" }}
     >
       <div
@@ -153,7 +153,7 @@ export function MinimalClean({
         ></div>
 
         {/* Avatar & Bio */}
-        <div className="relative flex flex-col items-center mt-6 px-6">
+        <div className="relative flex flex-col items-center mt-2 px-6">
           <div
             className="w-28 h-28 rounded-full border-4 shadow-lg overflow-hidden bg-gray-200 flex items-center justify-center -mt-14"
             style={{ borderColor: colors.background }}
