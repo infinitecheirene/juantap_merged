@@ -302,7 +302,7 @@ export function ClassicBlue() {
           <div className="px-6 pb-4">
             <div className="border-t border-gray-200 pt-4">
               <h3 className="text-xs font-medium text-gray-600 mb-3 uppercase tracking-wide">
-                Connect with me
+                Connect with meaaaa
               </h3>
               <div className="grid grid-cols-2 gap-2">
                 {profile.socialLinks

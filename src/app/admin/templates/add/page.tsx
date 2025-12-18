@@ -20,7 +20,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
-import { MinimalClean } from "@/components/template-previews/minimal-clean-template";
+import { MinimalClean } from "@/components/template-previews/minimal-clean-template-add";
 
 interface TemplateData {
   id: string;
@@ -80,7 +80,7 @@ const defaultTemplate: TemplateData = {
   is_new: false,
   downloads: 0,
   connectStyle: "grid",
-  socialStyle: "default",
+  socialStyle: "circles",
 };
 
 type TemplatePayload = Omit<
@@ -408,6 +408,7 @@ export default function AddTemplatePage() {
                       </SelectContent>
                     </Select>
                   </div>
+
                   <div>
                     <Label htmlFor="connectStyle">Connect Section Style</Label>
                     <Select

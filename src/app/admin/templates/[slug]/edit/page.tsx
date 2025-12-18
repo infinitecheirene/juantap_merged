@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { MinimalClean } from "@/components/template-previews/minimal-clean-template";
+import { MinimalClean } from "@/components/template-previews/minimal-clean-template-edit";
 
 type Template = {
   id: number;
@@ -184,6 +184,43 @@ export default function EditTemplatePage() {
                 setTemplate({ ...template, description: e.target.value })
               }
             />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Visibility / Hide Template */}
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle>Design Customization</CardTitle>
+        </CardHeader>
+        <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label>Social Links</Label>
+            <select
+              className="w-full border rounded p-2"
+              value={template.socialStyle ? "default" : "circles"}
+              onChange={(e) =>
+                setTemplate({ ...template, is_hidden: e.target.value === "1" })
+              }
+            >
+              <option value="default">Default</option>
+              <option value="circles">Circles</option>
+              <option value="fullblock">Full Block</option>
+            </select>
+          </div>
+          <div>
+            <Label>Social Links</Label>
+            <select
+              className="w-full border rounded p-2"
+              value={template.connectStyle ? "grid" : "list"}
+              onChange={(e) =>
+                setTemplate({ ...template, is_hidden: e.target.value === "1" })
+              }
+            >
+              <option value="grid">Grid</option>
+              <option value="list">List</option>
+              <option value="compact">Compact</option>
+            </select>
           </div>
         </CardContent>
       </Card>

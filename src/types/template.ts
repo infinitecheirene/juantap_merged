@@ -44,6 +44,8 @@ export interface Template {
   colors?: any;
   fonts?: any;
   layout?: string;
+  social_style?: string;
+  connection_style?: string;
   tags?: any;
   is_popular: boolean;
   is_new: boolean;

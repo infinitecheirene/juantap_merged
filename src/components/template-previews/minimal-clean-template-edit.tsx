@@ -65,7 +65,7 @@ export function MinimalClean({
     displayName: "example_displayname",
     location: "Manila PH",
     handle: "@username",
-    bio: "this is bui",
+    bio: "this is bio example text",
     email: "admin.example@gmail.com",
     socialLinks: [
       {
@@ -73,6 +73,24 @@ export function MinimalClean({
         platform: "instagram",
         username: "instagram_account",
         url: "https://instagram.com/2eub2e",
+      },
+      {
+        id: "facebook",
+        platform: "facebook",
+        username: "facebook_account",
+        url: "https://facebook.com/2eub2e",
+      },
+      {
+        id: "linkedin",
+        platform: "linkedin",
+        username: "linkedin_account",
+        url: "https://linkedin.com/2eub2e",
+      },
+      {
+        id: "indeed",
+        platform: "indeed",
+        username: "indeed_account",
+        url: "https://indeed.com/2eub2e",
       },
     ],
   };
@@ -114,11 +132,11 @@ export function MinimalClean({
   const getSocialLinkClass = () => {
     switch (socialStyle) {
       case "circles":
-        return "flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition";
+        return "flex w-10 h-10 items-center justify-center rounded-full hover:opacity-80 transition";
       case "fullblock":
-        return "flex items-center gap-3 rounded-lg p-4 text-sm hover:opacity-80 transition w-full";
+        return "flex w-full h-full items-center gap-3 rounded-lg p-4 text-sm hover:opacity-80 transition w-full";
       default:
-        return "flex items-center gap-2 rounded-lg p-2 text-sm hover:opacity-80 transition";
+        return "flex w-full h-full items-center gap-2 rounded-lg p-2 text-sm hover:opacity-80 transition";
     }
   };
 
@@ -129,7 +147,7 @@ export function MinimalClean({
       case "compact":
         return "flex flex-wrap gap-2";
       default:
-        return "grid grid-cols-2 gap-3";
+        return "grid grid-cols-1 gap-3";
     }
   };
 
@@ -336,7 +354,7 @@ export function MinimalClean({
                 <Download className="w-4 h-4 mr-2" />
                 Download
               </Button>
-              
+
               <Button onClick={() => setIsQRModalOpen(false)}>Close</Button>
             </div>
           </div>
