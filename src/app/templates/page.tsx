@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { TermsModal } from "@/components/auth/TermsModal";
+import { TermsModal } from "@/app/TermsModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Edit, Eye, Files, User, Loader2 } from "lucide-react";
 import {
