@@ -1,8 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { PricingCard } from "@/components/blocks/pricing-card";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 export function TemplatesSection() {
   const router = useRouter();
@@ -12,7 +12,22 @@ export function TemplatesSection() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-  }, []);
+
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      router.push("/");
+      return;
+    }
+    const user = JSON.parse(userData);
+
+    console.log("user admin ", user.is_admin);
+
+    if (!user.is_admin) {
+      router.push("/");
+    } else {
+      router.push("/admin/");
+    }
+  }, [router]);
 
   const handleButtonClick = (planName: string) => {
     setLoadingBtn(planName);

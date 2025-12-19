@@ -250,6 +250,15 @@ export default function EditProfilePage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      router.push("/");
+      return;
+    }
+    const user = JSON.parse(userData);
+
+    console.log("user admin ", user.is_admin);
+
     const token =
       typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -257,6 +266,11 @@ export default function EditProfilePage() {
       router.push("/login"); // redirect if no token
     } else {
       setIsAuthenticated(true); // allow access if token exists
+      if (!user.is_admin) {
+        router.push(`/dashboard/edit-profile/`);
+      } else {
+        router.push("/admin/");
+      }
     }
   }, [router]);
 
@@ -305,7 +319,7 @@ export default function EditProfilePage() {
                         previewURL ||
                         (profile.profile_image
                           ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/storage/${profile.profile_image}`
-                          : "/avatar.png") 
+                          : "/avatar.png")
                       }
                     />
                     <AvatarFallback className="text-lg">

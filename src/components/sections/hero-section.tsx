@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,6 +12,7 @@ export function HeroSection() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true); // track if we are still checking
   const [loadingBtn, setLoadingBtn] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,7 +42,23 @@ export function HeroSection() {
     };
 
     fetchUser();
-  }, []);
+
+    const userData = localStorage.getItem("user");
+    const data = userData ? JSON.parse(userData) : null;
+    if (!userData) {
+      router.push("/");
+      return;
+    }
+    const user = JSON.parse(userData);
+
+    console.log("user admin ", user.is_admin);
+
+    if (!user.is_admin) {
+      router.push("/dashboard/edit-profile");
+    } else {
+      router.push("/admin/");
+    }
+  }, [router]);
 
   // Don't render buttons until loading is done
   const linkHref = !loading && user ? "/templates" : "/register";
@@ -70,7 +88,7 @@ export function HeroSection() {
           custom designs, and instant sharing via QR codes or NFC. Perfect for
           networking, business cards, and social media.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
           <Link href={linkHref} onClick={() => setLoadingBtn("create")}>
             <Button
