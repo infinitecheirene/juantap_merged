@@ -47,123 +47,123 @@ export function Logo({ variant = "light", className }: LogoProps) {
   );
 }
 
-const [user, setUser] = useState<any>(null);
-const [isLoggedIn, setIsLoggedIn] = useState(false);
-const router = useRouter();
-const pathname = usePathname();
-const [hash, setHash] = useState("");
-const [loadingNav, setLoadingNav] = useState<string | null>(null);
-const [loadingItem, setLoadingItem] = useState<string | null>(null);
-const [loadingAction, setLoadingAction] = useState<string | null>(null);
-
-const handleNavClick = (path: string) => {
-  setLoadingNav(path); // show loader for clicked nav
-  router.push(path);
-};
-
-// Load cached user immediately for instant render
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  const cachedUser = localStorage.getItem("user");
-
-  if (cachedUser) {
-    try {
-      const parsed = JSON.parse(cachedUser);
-      setUser(parsed);
-      setIsLoggedIn(true);
-    } catch (e) {
-      console.error("Invalid cached user:", e);
-    }
-  } else if (token) {
-    setIsLoggedIn(true);
-  }
-
-  // Fetch latest user data from API
-  if (token) {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        });
-        if (res.ok) {
-          const userData = await res.json();
-          setUser(userData);
-          localStorage.setItem("user", JSON.stringify(userData)); // cache
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchUser();
-  }
-}, []);
-
-useEffect(() => {
-  const updateHash = () => setHash(window.location.hash);
-  updateHash();
-  window.addEventListener("hashchange", updateHash);
-  return () => window.removeEventListener("hashchange", updateHash);
-}, []);
-
-const getProfileImageUrl = (path?: string) => {
-  if (!path) return "/placeholder.svg?height=40&width=40";
-  if (path.startsWith("http")) return path;
-  return `${process.env.NEXT_PUBLIC_IMAGE_URL}/storage/${path}`;
-};
-
-const handleLogout = async () => {
-  setLoadingAction("logout"); // start loader
-
-  // simulate a short delay if needed for API cleanup
-  setTimeout(() => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
-    setUser(null);
-    setLoadingAction(null); // stop loader
-    router.push("/login");
-  }, 300); // small delay to show loader
-};
-
-const isActive = (path: string) => {
-  if (path === "/") return pathname === "/" && hash === "";
-  return pathname.startsWith(path);
-};
-
-interface FooterSection {
-  title: string;
-  links: Array<{
-    href: string;
-    label: string;
-  }>;
-}
-
-const footerSections: FooterSection[] = [
-  {
-    title: "Product",
-    links: [
-      { href: "#", label: "Features" },
-      { href: "#", label: "Templates" },
-      { href: "#", label: "Pricing" },
-    ],
-  },
-  {
-    title: "Support",
-    links: [
-      { href: "#", label: "Help Center" },
-      { href: "#", label: "Contact Us" },
-    ],
-  },
-  {
-    title: "User Agreement",
-    links: [{ href: "#", label: "Terms of Service" }],
-  },
-];
-
 export default function HomePage() {
+  const [user, setUser] = useState<any>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [hash, setHash] = useState("");
+  const [loadingNav, setLoadingNav] = useState<string | null>(null);
+  const [loadingItem, setLoadingItem] = useState<string | null>(null);
+  const [loadingAction, setLoadingAction] = useState<string | null>(null);
+
+  const handleNavClick = (path: string) => {
+    setLoadingNav(path); // show loader for clicked nav
+    router.push(path);
+  };
+
+  // Load cached user immediately for instant render
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const cachedUser = localStorage.getItem("user");
+
+    if (cachedUser) {
+      try {
+        const parsed = JSON.parse(cachedUser);
+        setUser(parsed);
+        setIsLoggedIn(true);
+      } catch (e) {
+        console.error("Invalid cached user:", e);
+      }
+    } else if (token) {
+      setIsLoggedIn(true);
+    }
+
+    // Fetch latest user data from API
+    if (token) {
+      const fetchUser = async () => {
+        try {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              Accept: "application/json",
+            },
+          });
+          if (res.ok) {
+            const userData = await res.json();
+            setUser(userData);
+            localStorage.setItem("user", JSON.stringify(userData)); // cache
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      fetchUser();
+    }
+  }, []);
+
+  useEffect(() => {
+    const updateHash = () => setHash(window.location.hash);
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, []);
+
+  const getProfileImageUrl = (path?: string) => {
+    if (!path) return "/placeholder.svg?height=40&width=40";
+    if (path.startsWith("http")) return path;
+    return `${process.env.NEXT_PUBLIC_IMAGE_URL}/storage/${path}`;
+  };
+
+  const handleLogout = async () => {
+    setLoadingAction("logout"); // start loader
+
+    // simulate a short delay if needed for API cleanup
+    setTimeout(() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setIsLoggedIn(false);
+      setUser(null);
+      setLoadingAction(null); // stop loader
+      router.push("/login");
+    }, 300); // small delay to show loader
+  };
+
+  const isActive = (path: string) => {
+    if (path === "/") return pathname === "/" && hash === "";
+    return pathname.startsWith(path);
+  };
+
+  interface FooterSection {
+    title: string;
+    links: Array<{
+      href: string;
+      label: string;
+    }>;
+  }
+
+  const footerSections: FooterSection[] = [
+    {
+      title: "Product",
+      links: [
+        { href: "#", label: "Features" },
+        { href: "#", label: "Templates" },
+        { href: "#", label: "Pricing" },
+      ],
+    },
+    {
+      title: "Support",
+      links: [
+        { href: "#", label: "Help Center" },
+        { href: "#", label: "Contact Us" },
+      ],
+    },
+    {
+      title: "User Agreement",
+      links: [{ href: "#", label: "Terms of Service" }],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
@@ -175,11 +175,10 @@ export default function HomePage() {
             <nav className="hidden md:flex items-center space-x-6">
               <button
                 onClick={() => handleNavClick("/")}
-                className={`transition-colors flex items-center space-x-1 ${
-                  isActive("/")
+                className={`transition-colors flex items-center space-x-1 ${isActive("/")
                     ? "text-blue-600 font-semibold"
                     : "text-gray-600 hover:text-gray-900"
-                }`}
+                  }`}
               >
                 <span>Home</span>
                 {loadingNav === "/" && (
@@ -189,11 +188,10 @@ export default function HomePage() {
 
               <button
                 onClick={() => handleNavClick("/templates")}
-                className={`transition-colors ${
-                  isActive("/templates")
+                className={`transition-colors ${isActive("/templates")
                     ? "text-blue-600 font-semibold"
                     : "text-gray-600 hover:text-gray-900"
-                } flex items-center space-x-1`}
+                  } flex items-center space-x-1`}
               >
                 <span>Templates</span>
                 {loadingNav === "/templates" && (
