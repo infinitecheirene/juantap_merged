@@ -675,8 +675,8 @@ export default function EditProfilePage() {
       <AlertDialog open={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete social link</AlertDialogTitle>
-            <AlertDialogDescription>Are you sure you want to delete this social link? This action cannot be undone.</AlertDialogDescription>
+            <AlertDialogTitle>Delete social media link</AlertDialogTitle>
+            <AlertDialogDescription>Are you sure you want to delete this social media link? This action cannot be undone.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
