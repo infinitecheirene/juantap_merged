@@ -59,7 +59,6 @@ export default function EditProfilePage() {
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
   const [usernameError, setUsernameError] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<Profile>({
     name: "",
     email: "",
@@ -77,6 +76,8 @@ export default function EditProfilePage() {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const avatarInputRef = useRef<HTMLInputElement>(null);
+
+  type ValidationErrors = Record<string, string[]>;
 
   const handleSave = async () => {
     const token = localStorage.getItem("token");
@@ -127,16 +128,17 @@ export default function EditProfilePage() {
         setProfile((prev: Profile) => ({ ...prev, ...data }));
         toast.success("Profile saved!");
       } else if (res.status === 422) {
-        // Validation errors
-        const err = await res.json();
+        const err = (await res.json()) as { errors?: ValidationErrors };
+
         if (err.errors?.username) {
           toast.error("Username is already taken. Please choose another.");
-        } else {
-          // Show the first validation error if any
-          const firstError = Object.values(err.errors || {})[0]?.[0];
+        } else if (err.errors) {
+          const firstError = Object.values(err.errors)[0]?.[0];
           toast.error(
             firstError || "Validation error. Please check your input."
           );
+        } else {
+          toast.error("Validation error. Please check your input.");
         }
       } else {
         const err = await res.json();
@@ -145,10 +147,10 @@ export default function EditProfilePage() {
     } catch (err) {
       console.error("Failed to save profile", err);
       toast.error(
-        "Failed to save profile. Username maybe already taken. Please try again."
+        "Failed to save profile. Username may already be taken. Please try again."
       );
     } finally {
-      setIsSaving(false); // stop loading
+      setIsSaving(false);
     }
   };
 
@@ -251,37 +253,29 @@ export default function EditProfilePage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-  const checkAuth = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/me`, {
-        credentials: "include", // sends HttpOnly cookie automatically
-      });
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+      router.push("/");
+      return;
+    }
+    const user = JSON.parse(userData);
 
-      if (!res.ok) {
-        setIsAuthenticated(false);
-        router.push("/login");
-        return;
-      }
+    console.log("user admin ", user.is_admin);
 
-      const user = await res.json();
-      setUser(user);
-      setIsAuthenticated(true);
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
+    if (!token) {
+      router.push("/login"); // redirect if no token
+    } else {
+      setIsAuthenticated(true); // allow access if token exists
       if (!user.is_admin) {
-        router.push(`/dashboard/edit-profile`);
+        router.push(`/dashboard/edit-profile/`);
       } else {
         router.push("/admin/");
       }
-    } catch (err) {
-      console.error(err);
-      setIsAuthenticated(false);
-      router.push("/login");
     }
-  };
-
-  checkAuth();
-}, [router]);
-
+  }, [router]);
 
   // ✅ ADD THIS LINE BEFORE THE RETURN
   // Show nothing while checking auth

@@ -11,14 +11,14 @@ interface SocialLink {
 }
 
 interface ListSocialLinksProps {
-  user: {
+  user?: {
     profile?: {
       socialLinks?: SocialLink[]
     }
   }
   template: {
-    fonts: { heading?: string; body?: string }
-    colors: { text: string; secondary: string; accent: string }
+    fonts?: { heading?: string; body?: string }
+    colors?: { text?: string; secondary?: string; accent?: string }
   }
 }
 
@@ -44,7 +44,7 @@ export const ListSocialLinks: React.FC<ListSocialLinksProps> = ({ user, template
       <h2
         className="text-sm font-semibold uppercase mb-3 tracking-wide text-foreground"
         style={{
-          color: template?.colors?.text,
+          color: template?.colors?.text ?? "inherit",
           fontFamily: template?.fonts?.heading,
         }}
       >
@@ -64,12 +64,12 @@ export const ListSocialLinks: React.FC<ListSocialLinksProps> = ({ user, template
               rel="noreferrer"
               className={cn("flex items-center gap-2 rounded-lg p-2 py-3 text-sm hover:opacity-80 transition")}
               style={{
-                backgroundColor: `${template?.colors?.accent}15`,
-                color: template?.colors?.text,
+                backgroundColor: template?.colors?.accent ? `${template.colors.accent}15` : "transparent",
+                color: template?.colors?.text ?? "inherit",
                 fontFamily: template?.fonts?.body,
               }}
             >
-              <span style={{ color: template?.colors?.secondary }}>{icon}</span>
+              <span style={{ color: template?.colors?.secondary ?? "inherit" }}>{icon}</span>
               <span className="truncate">{link.username}</span>
             </a>
           )

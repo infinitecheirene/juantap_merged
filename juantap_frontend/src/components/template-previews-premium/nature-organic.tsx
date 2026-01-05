@@ -317,7 +317,7 @@ export function NatureOrganic() {
         )}
 
         {/* Social Links */}
-        {profile?.socialLinks?.length > 0 && (
+        {(profile?.socialLinks?.length ?? 0) > 0 && (
           <>
             <div className="border-t border-gray-200"></div>
             <div className="px-6 py-3">
@@ -325,7 +325,7 @@ export function NatureOrganic() {
                 Connect
               </h3>
               <div className="flex flex-wrap gap-2">
-                {profile.socialLinks
+                {(profile?.socialLinks ?? [])
                   .filter((link) => link.isVisible)
                   .map((link) => {
                     // normalize key: lowercase and trim

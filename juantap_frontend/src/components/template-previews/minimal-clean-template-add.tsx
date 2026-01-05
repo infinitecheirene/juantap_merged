@@ -407,12 +407,12 @@ export function MinimalClean({
                     fontFamily: fonts.body,
                   }}
                 >
-                  {socialStyle === "circles" ? (
+                  {(socialStyle as string) === "circles" ? (
                     <span style={{ color: colors.accent }}>{icon}</span>
                   ) : (
                     <>
                       <span style={{ color: colors.accent }}>{icon}</span>
-                      {socialStyle !== "circles" && (
+                      {(socialStyle as string) !== "circles" && (
                         <span>{link.username}</span>
                       )}
                     </>

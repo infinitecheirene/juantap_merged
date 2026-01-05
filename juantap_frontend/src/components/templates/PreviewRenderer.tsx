@@ -41,7 +41,8 @@ interface SocialLink {
 
 interface PreviewRendererProps {
   template: Template;
-  user: User;
+  user?: User | null;
+  slug?: string;
 }
 
 export const PreviewRenderer: React.FC<PreviewRendererProps> = ({
@@ -93,8 +94,8 @@ export const PreviewRenderer: React.FC<PreviewRendererProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = (text?: string) => {
+    navigator.clipboard.writeText(text ?? "");
     toast.success("Copied!");
   };
 
@@ -236,7 +237,7 @@ export const PreviewRenderer: React.FC<PreviewRendererProps> = ({
               <button
                 className="hover:opacity-70"
                 style={{ color: template?.colors?.secondary }}
-                onClick={() => handleCopy(user.profile.phone)}
+                onClick={() => handleCopy(user?.profile?.phone)}
               >
                 <Copy size={16} />
               </button>
@@ -270,7 +271,7 @@ export const PreviewRenderer: React.FC<PreviewRendererProps> = ({
               <button
                 className="hover:opacity-70"
                 style={{ color: template?.colors?.secondary }}
-                onClick={() => handleCopy(user.profile.website)}
+                onClick={() => handleCopy(user?.profile?.website)}
               >
                 <Copy size={16} />
               </button>
@@ -297,7 +298,7 @@ export const PreviewRenderer: React.FC<PreviewRendererProps> = ({
               <button
                 className="hover:opacity-70"
                 style={{ color: template?.colors?.secondary }}
-                onClick={() => handleCopy(user.profile.location)}
+                onClick={() => handleCopy(user?.profile?.location)}
               >
                 <Copy size={16} />
               </button>
@@ -321,9 +322,7 @@ export const PreviewRenderer: React.FC<PreviewRendererProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 {user?.profile?.socialLinks
-                  ?.filter(
-                    (link) => link.isVisible === true || link.isVisible === 1
-                  )
+                  ?.filter((link) => link.isVisible === true)
 
                   .map((link: SocialLink) => {
                     const platformKey = link.platform?.toLowerCase();

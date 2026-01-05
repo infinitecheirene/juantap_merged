@@ -1,11 +1,13 @@
 import type { Template } from "@/lib/template-data";
+import type { User } from "@/types/template";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Palette, Type, Layout, Smartphone } from "lucide-react";
 
 interface TemplatePreviewContentProps {
   template: Template;
-}
+  user?: User | null;
+} 
 
 export function TemplatePreviewContent({
   template,

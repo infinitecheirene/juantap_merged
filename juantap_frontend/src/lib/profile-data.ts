@@ -27,6 +27,10 @@ export interface ProfileData {
     accentColor: string;
     fontFamily: string;
   };
+  // Added for runtime & filtering
+  isActive?: boolean;
+  viewCount?: number;
+  createdAt?: string;
 }
 
 // Mock data - replace with actual database calls
@@ -200,7 +204,7 @@ export async function getPublicProfile(
   }
 
   // Increment view count (in real app, this would be a separate API call)
-  profile.viewCount += 1;
+  profile.viewCount = (profile.viewCount ?? 0) + 1;
 
   return profile;
 }

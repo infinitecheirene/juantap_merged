@@ -61,9 +61,9 @@ export function DataTable<TData extends { id: number }, TValue>({
     rowSelection,
   },
   enableRowSelection: true,
-  onSortingChange: setSorting,
-  onColumnFiltersChange: setColumnFilters,
-  onColumnVisibilityChange: setColumnVisibility,
+  onSortingChange: setSorting as any,
+  onColumnFiltersChange: setColumnFilters as any,
+  onColumnVisibilityChange: setColumnVisibility as any,
   onRowSelectionChange: setRowSelection,
   getCoreRowModel: getCoreRowModel(),
   getFilteredRowModel: getFilteredRowModel(),
@@ -144,7 +144,7 @@ export function DataTable<TData extends { id: number }, TValue>({
          <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => {
-              const payment = row.original as Payment
+              const payment = row.original as unknown as Payment
               const isExpanded = expandedRows.includes(payment.id)
 
               const baseRow = (

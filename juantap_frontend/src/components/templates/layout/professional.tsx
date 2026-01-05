@@ -123,12 +123,13 @@ END:VCARD
   return (
     <div className="flex justify-center px-4 py-6 sm:px-6">
       <div
-        key={`${template.fonts.heading}-${template.fonts.body}`}
+        key={`${template.fonts?.heading ?? ""}-${template.fonts?.body ?? ""}`}
         className="w-full max-w-lg shadow-2xl rounded-2xl overflow-hidden flex flex-col mx-auto animate-in fade-in duration-500"
         style={{
           fontFamily: template?.fonts?.body,
-          background: template.colors.background,
+          background: template.colors?.background ?? "transparent",
         }}
+
       >
         <div className="relative flex flex-col items-center pt-8 px-4 sm:px-6">
           <div className="w-48 h-64 sm:w-56 sm:h-72 rounded-3xl overflow-hidden bg-muted shadow-xl mb-6">
@@ -145,13 +146,13 @@ END:VCARD
             className="w-full px-6 py-3"
             style={{
               fontFamily: template?.fonts?.heading,
-              background: template.colors.primary,
+              background: template.colors?.primary ?? "transparent",
             }}
           >
             <h1
-              className={cn(fontClassMap[template.fonts.heading], "text-lg sm:text-xl font-bold text-center uppercase tracking-wide")}
+              className={cn(fontClassMap[template.fonts?.heading ?? ""], "text-lg sm:text-xl font-bold text-center uppercase tracking-wide")}
               style={{
-                color: template.colors.accent,
+                color: template.colors?.accent ?? "inherit",
               }}
             >
               {user?.display_name || user?.name || user?.username || "Anonymous"}
@@ -160,9 +161,9 @@ END:VCARD
 
           {user?.profile?.bio && (
             <p
-              className={cn(fontClassMap[template.fonts.body], "text-sm text-center mt-4 px-2 leading-relaxed")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "text-sm text-center mt-4 px-2 leading-relaxed")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               {user.profile.bio}
@@ -175,8 +176,9 @@ END:VCARD
             className="text-sm font-semibold uppercase tracking-wide mb-3 text-foreground"
             style={{
               fontFamily: template?.fonts?.heading,
-              color: template.colors.text,
+              color: template.colors?.text ?? "inherit",
             }}
+
           >
             Contact
           </h2>
@@ -184,7 +186,7 @@ END:VCARD
           {user?.email && (
             <div
               className={cn(
-                fontClassMap[template.fonts.body],
+                fontClassMap[template.fonts?.body ?? ""],
                 "flex items-center gap-3 rounded-lg p-3 text-sm transition-colors hover:bg-muted border border-border",
               )}
             >
@@ -192,7 +194,7 @@ END:VCARD
                 size={16}
                 className="text-muted-foreground flex-shrink-0"
                 style={{
-                  color: template.colors.secondary,
+                  color: template.colors?.secondary ?? "inherit",
                 }}
               />
               <div className="flex flex-col gap-2 flex-1 min-w-0">
@@ -202,9 +204,9 @@ END:VCARD
                     <div key={index} className="flex justify-between items-center gap-2">
                       <a
                         href={`mailto:${trimmed}`}
-                        className={cn(fontClassMap[template.fonts.body], "truncate hover:opacity-70 transition-opacity")}
+                        className={cn(fontClassMap[template.fonts?.body ?? ""], "truncate hover:opacity-70 transition-opacity")}
                         style={{
-                          color: template.colors.text,
+                          color: template.colors?.text ?? "inherit",
                         }}
                       >
                         {trimmed}
@@ -216,7 +218,7 @@ END:VCARD
                         <Copy
                           size={16}
                           style={{
-                            color: template.colors.secondary,
+                            color: template.colors?.secondary ?? "inherit",
                           }}
                         />
                       </button>
@@ -230,7 +232,7 @@ END:VCARD
           {user?.profile?.phone && (
             <div
               className={cn(
-                fontClassMap[template.fonts.body],
+                fontClassMap[template.fonts?.body ?? ""],
                 "flex items-center gap-2 rounded-lg p-3 text-sm transition-colors hover:bg-muted border border-border",
               )}
               style={{
@@ -241,20 +243,20 @@ END:VCARD
                 size={16}
                 className="flex-shrink-0 text-muted-foreground"
                 style={{
-                  color: template.colors.secondary,
+                  color: template.colors?.secondary ?? "inherit",
                 }}
               />
               <div className="flex flex-col gap-1.5 flex-1 min-w-0">
                 {user.profile.phone.split(",").map((phone, index) => {
                   const trimmedPhone = phone.trim()
                   return (
-                    <div key={index} className={cn(fontClassMap[template.fonts.body], "flex justify-between items-center gap-2 text-foreground")}>
+                    <div key={index} className={cn(fontClassMap[template.fonts?.body ?? ""], "flex justify-between items-center gap-2 text-foreground")}>
                       <a
                         href={`tel:${trimmedPhone}`}
                         className="hover:opacity-70 truncate transition-opacity"
                         style={{
                           fontFamily: template?.fonts?.body,
-                          color: template.colors.text,
+                          color: template.colors?.text ?? "inherit",
                         }}
                       >
                         {trimmedPhone}
@@ -266,7 +268,7 @@ END:VCARD
                         <Copy
                           size={16}
                           style={{
-                            color: template.colors.secondary,
+                            color: template.colors?.secondary ?? "inherit",
                           }}
                         />
                       </button>
@@ -288,7 +290,7 @@ END:VCARD
                 size={16}
                 className="flex-shrink-0 text-muted-foreground"
                 style={{
-                  color: template.colors.secondary,
+                  color: template.colors?.secondary ?? "inherit",
                 }}
               />
               <div className="flex flex-col gap-1.5 flex-1 min-w-0">
@@ -300,10 +302,10 @@ END:VCARD
                         href={trimmedSite.startsWith("http") ? trimmedSite : `https://${trimmedSite}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={cn(fontClassMap[template.fonts.body], "hover:opacity-70 truncate transition-opacity")}
+                        className={cn(fontClassMap[template.fonts?.body ?? ""], "hover:opacity-70 truncate transition-opacity")}
                         style={{
                           fontFamily: template?.fonts?.body,
-                          color: template.colors.text,
+                          color: template.colors?.text ?? "inherit",
                         }}
                       >
                         {trimmedSite.replace(/^https?:\/\//, "")}
@@ -315,7 +317,7 @@ END:VCARD
                         <Copy
                           size={16}
                           style={{
-                            color: template.colors.secondary,
+                            color: template.colors?.secondary ?? "inherit",
                           }}
                         />
                       </button>
@@ -338,17 +340,17 @@ END:VCARD
                   size={16}
                   className="flex-shrink-0 text-muted-foreground"
                   style={{
-                    color: template.colors.secondary,
+                    color: template.colors?.secondary ?? "inherit",
                   }}
                 />
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(user.profile.location)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn(fontClassMap[template.fonts.body], "truncate hover:opacity-70 transition-opacity")}
+                  className={cn(fontClassMap[template.fonts?.body ?? ""], "truncate hover:opacity-70 transition-opacity")}
                   style={{
                     fontFamily: template?.fonts?.body,
-                    color: template.colors.text,
+                    color: template.colors?.text ?? "inherit",
                   }}
                 >
                   {user.profile.location}
@@ -361,7 +363,7 @@ END:VCARD
                 <Copy
                   size={16}
                   style={{
-                    color: template.colors.secondary,
+                    color: template.colors?.secondary ?? "inherit",
                   }}
                 />
               </button>
@@ -370,26 +372,26 @@ END:VCARD
         </div>
 
         {/* Social Links */}
-        {template.connectStyle === "grid" && <GridSocialLinks user={user} template={template} />}
-        {template.connectStyle === "list" && <ListSocialLinks user={user} template={template} />}
+        {template.connectStyle === "grid" && <GridSocialLinks user={user ?? undefined} template={template} />}
+        {template.connectStyle === "list" && <ListSocialLinks user={user ?? undefined} template={template} /> }
 
         <div
-          className={cn(fontClassMap[template.fonts.body], "flex justify-around border-t border-border p-4 bg-card")}
+          className={cn(fontClassMap[template.fonts?.body ?? ""], "flex justify-around border-t border-border p-4 bg-card")}
           style={{
-            background: template.colors.background,
+            background: template.colors?.background ?? "transparent",
           }}
         >
           <button onClick={() => setIsQRModalOpen(true)} className="flex flex-col items-center text-sm hover:scale-110 transition-transform">
             <QrCode
               className="w-5 h-5 mb-1"
               style={{
-                color: template.colors.secondary,
+                color: template.colors?.secondary ?? "inherit",
               }}
             />
             <span
-              className={cn(fontClassMap[template.fonts.body], "whitespace-nowrap")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "whitespace-nowrap")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               QR Code
@@ -399,13 +401,13 @@ END:VCARD
             <Share2
               className="w-5 h-5 mb-1"
               style={{
-                color: template.colors.secondary,
+                color: template.colors?.secondary ?? "inherit",
               }}
             />
             <span
-              className={cn(fontClassMap[template.fonts.body], "whitespace-nowrap")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "whitespace-nowrap")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               Share
@@ -415,13 +417,13 @@ END:VCARD
             <Download
               className="w-5 h-5 mb-1"
               style={{
-                color: template.colors.secondary,
+                color: template.colors?.secondary ?? "inherit",
               }}
             />
             <span
-              className={cn(fontClassMap[template.fonts.body], "whitespace-nowrap")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "whitespace-nowrap")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               Save

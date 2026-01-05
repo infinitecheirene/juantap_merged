@@ -375,7 +375,7 @@ export function RetroVintage() {
         )}
 
         {/* Social Links */}
-        {profile?.socialLinks?.length > 0 && (
+        {(profile?.socialLinks?.length ?? 0) > 0 && (
           <>
             <div
               className="border-t mx-6"
@@ -393,7 +393,7 @@ export function RetroVintage() {
               </h3>
 
               <div className="flex flex-wrap justify-center gap-2">
-                {profile.socialLinks
+                {(profile?.socialLinks ?? [])
                   .filter((link) => link.isVisible)
                   .map((link) => {
                     // normalize key: lowercase and trim

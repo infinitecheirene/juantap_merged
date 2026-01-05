@@ -31,6 +31,7 @@ interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
   template: Template;
+  onPaymentSuccess?: () => void;
 }
 
 interface PaymentMethod {
@@ -41,7 +42,7 @@ interface PaymentMethod {
   accountInfo: string;
 }
 
-export function PaymentModal({ isOpen, onClose, template }: PaymentModalProps) {
+export function PaymentModal({ isOpen, onClose, template, onPaymentSuccess }: PaymentModalProps) {
   // 🔑 Move useEffect inside the component
   useEffect(() => {
     const fetchPaymentAccounts = async () => {
@@ -231,6 +232,11 @@ export function PaymentModal({ isOpen, onClose, template }: PaymentModalProps) {
   };
 
   const handleClose = () => {
+    // If a successful submission was made, notify parent before resetting
+    if (isSubmitted && typeof onPaymentSuccess === "function") {
+      onPaymentSuccess();
+    }
+
     resetModal();
     onClose();
   };
@@ -312,14 +318,14 @@ export function PaymentModal({ isOpen, onClose, template }: PaymentModalProps) {
                 </div>
 
                 <div className="text-right">
-                  {template.originalPrice && template.discount ? (
+                  {template.original_price && template.discount ? (
                     <div>
                       <span className="text-xl font-bold">
                         ₱{template.price}
                       </span>
 
                       <span className="text-sm text-gray-500 line-through ml-2">
-                        ₱{template.originalPrice}
+                        ₱{template.original_price}
                       </span>
 
                       <Badge variant="destructive" className="ml-2 bg-red-500">

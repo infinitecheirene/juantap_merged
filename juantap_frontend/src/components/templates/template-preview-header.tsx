@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import type { Template } from "@/lib/template-data";
+import type { User } from "@/types/template";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Crown, Star, Sparkles } from "lucide-react";
@@ -10,7 +11,8 @@ import Link from "next/link";
 
 interface TemplatePreviewHeaderProps {
   template: Template;
-}
+  user?: User | null;
+} 
 
 export function TemplatePreviewHeader({
   template,
@@ -85,13 +87,13 @@ export function TemplatePreviewHeader({
           <div className="text-left sm:text-right">
             {isPremium ? (
               <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
-                {template.originalPrice && template.discount ? (
+                {template.original_price && template.discount ? (
                   <>
                     <span className="text-2xl font-bold text-gray-900">
                       ₱{template.price}
                     </span>
                     <span className="text-lg text-gray-500 line-through">
-                      ₱{template.originalPrice}
+                      ₱{template.original_price}
                     </span>
                     <Badge variant="destructive" className="bg-red-500">
                       -{template.discount}%

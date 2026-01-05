@@ -297,9 +297,9 @@ END:VCARD
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 flex-1 hover:opacity-80 truncate"
-                    style={{ color: template?.colors?.text }}
+                    style={{ color: template?.colors?.text ?? "inherit" }}
                   >
-                    <MapPin size={16} style={{ color: template?.colors?.secondary }} className="flex-shrink-0 self-start mt-0.5" />
+                    <MapPin size={16} style={{ color: template?.colors?.secondary ?? "inherit" }} className="flex-shrink-0 self-start mt-0.5" />
 
                     <span className="truncate">{user.profile.location}</span>
                   </a>
@@ -309,7 +309,7 @@ END:VCARD
                       navigator.clipboard.writeText(user?.profile?.location!)
                     }}
                     className="hover:opacity-70 ml-2"
-                    style={{ color: template?.colors?.secondary }}
+                    style={{ color: template.colors?.secondary ?? "inherit" }}
                   >
                     <Copy size={16} />
                   </button>
@@ -326,22 +326,22 @@ END:VCARD
 
         {/* Bottom Actions */}
         <div
-          className={cn(fontClassMap[template.fonts.body], "flex justify-around border-t border-border p-4 bg-card")}
+          className={cn(fontClassMap[template.fonts?.body ?? ""], "flex justify-around border-t border-border p-4 bg-card")}
           style={{
-            background: template.colors.background,
+            background: template.colors?.background ?? "transparent",
           }}
         >
           <button onClick={() => setIsQRModalOpen(true)} className="flex flex-col items-center text-sm hover:scale-110 transition-transform">
             <QrCode
               className="w-5 h-5 mb-1"
               style={{
-                color: template.colors.secondary,
+                color: template.colors?.secondary ?? "inherit",
               }}
             />
             <span
-              className={cn(fontClassMap[template.fonts.body], "whitespace-nowrap")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "whitespace-nowrap")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               QR Code
@@ -351,13 +351,13 @@ END:VCARD
             <Share2
               className="w-5 h-5 mb-1"
               style={{
-                color: template.colors.secondary,
+                color: template.colors?.secondary ?? "inherit",
               }}
             />
             <span
-              className={cn(fontClassMap[template.fonts.body], "whitespace-nowrap")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "whitespace-nowrap")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               Share
@@ -367,13 +367,13 @@ END:VCARD
             <Download
               className="w-5 h-5 mb-1"
               style={{
-                color: template.colors.secondary,
+                color: template.colors?.secondary ?? "inherit",
               }}
             />
             <span
-              className={cn(fontClassMap[template.fonts.body], "whitespace-nowrap")}
+              className={cn(fontClassMap[template.fonts?.body ?? ""], "whitespace-nowrap")}
               style={{
-                color: template.colors.text,
+                color: template.colors?.text ?? "inherit",
               }}
             >
               Save

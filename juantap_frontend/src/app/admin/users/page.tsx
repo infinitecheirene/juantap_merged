@@ -25,6 +25,7 @@ interface User {
   email: string;
   is_admin: boolean;
   profile_image: string;
+  profile_image_url?: string;
   profile?: UserProfile;
 }
 
@@ -208,6 +209,7 @@ export default function AdminUsersPage() {
               <div className="flex flex-col items-center gap-4">
                 <Image
                   src={
+                    selectedUser.profile_image ||
                     selectedUser.profile_image_url ||
                     "https://play-lh.googleusercontent.com/y85Wq41fBfoivml6J3lTqB-WINrb2dbUTGVbYkRG12vIbiJXO97Y6N4y3JWA2rcFiQ=w480-h960-rw"
                   }

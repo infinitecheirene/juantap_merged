@@ -2,23 +2,17 @@ import React from "react"
 import { cn } from "@/lib/utils"
 import { fontClassMap } from "@/const/fontMap"
 import { Facebook, Github, Globe, Instagram, Linkedin, Twitter, Youtube } from "lucide-react"
-
-interface SocialLink {
-  id: string | number
-  platform: string
-  url: string
-  isVisible?: boolean
-}
+import { SocialLink } from "@/types/template"
 
 interface ListSocialLinksProps {
-  user: {
+  user?: {
     profile?: {
       socialLinks?: SocialLink[]
     }
   }
   template: {
-    fonts: { heading?: string; body?: string }
-    colors: { text: string; secondary: string; accent: string }
+    fonts?: { heading?: string; body?: string }
+    colors?: { text?: string; secondary?: string; accent?: string }
   }
 }
 
@@ -128,10 +122,10 @@ export const GridSocialLinks: React.FC<ListSocialLinksProps> = ({ user, template
   return (
     <div className="px-6 pb-6">
       <h2
-        className={cn(fontClassMap[template?.fonts?.heading || ""], "text-sm font-semibold uppercase mb-3 tracking-wide text-foreground")}
+        className={cn(fontClassMap[template?.fonts?.heading ?? ""], "text-sm font-semibold uppercase mb-3 tracking-wide text-foreground")}
         style={{
           fontFamily: template?.fonts?.heading,
-          color: template?.colors?.text,
+          color: template?.colors?.text ?? "inherit",
         }}
       >
         Connect with me
@@ -150,7 +144,7 @@ export const GridSocialLinks: React.FC<ListSocialLinksProps> = ({ user, template
                 target="_blank"
                 rel="noreferrer"
                 className={cn(
-                  fontClassMap[template.fonts.body || ""],
+                  fontClassMap[template.fonts?.body ?? ""],
                   "flex items-center justify-center rounded-xl w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0",
                   "hover:scale-110 transition-all hover:opacity-80 shadow-md active:scale-95",
                 )}

@@ -205,8 +205,9 @@ export const columns: ColumnDef<Payment>[] = [
               : "Payment disapproved successfully!"
           );
 
-          if (table.options.meta?.refreshData) {
-            table.options.meta.refreshData();
+          // metadata may include a refresh function (not part of TableMeta typing)
+          if ((table.options.meta as any)?.refreshData) {
+            (table.options.meta as any).refreshData();
           }
         } catch (error: unknown) {
           if (error instanceof Error) {

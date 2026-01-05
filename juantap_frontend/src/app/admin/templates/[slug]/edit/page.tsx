@@ -17,13 +17,28 @@ type Template = {
   slug: string;
   name: string;
   description: string;
-  colors: Record<string, string>;
-  fonts: Record<string, string>;
+  colors: {
+    primary?: string;
+    secondary?: string;
+    accent?: string;
+    background?: string;
+    text?: string;
+  };
+  fonts: {
+    heading?: string;
+    body?: string;
+  };
   features: string[] | object;
   tags: string[] | object;
-  socialStyle?: string;
-  connectStyle?: string;
+  socialStyle?: "default" | "circles" | "fullblock";
+  connectStyle?: "grid" | "list" | "compact";
   is_hidden?: boolean;
+
+  // Pricing fields
+  is_premium?: boolean;
+  price?: number | null;
+  original_price?: number | null;
+  discount?: number | null;
 };
 
 type TemplatePayload = Omit<
@@ -238,7 +253,7 @@ export default function EditTemplatePage() {
                 <Input
                   type="color"
                   value={
-                    template.colors?.[key] ||
+                    (template.colors as any)?.[key] ||
                     (key === "background" ? "#ffffff" : "#000000")
                   }
                   onChange={(e) => updateColor(key, e.target.value)}
@@ -361,8 +376,17 @@ export default function EditTemplatePage() {
             <MinimalClean
               socialStyle={template.socialStyle}
               connectStyle={template.connectStyle}
-              colors={template.colors}
-              fonts={template.fonts}
+              colors={{
+                primary: template.colors?.primary ?? "#000000",
+                secondary: template.colors?.secondary ?? "#6b7280",
+                accent: template.colors?.accent ?? "#fb7185",
+                background: template.colors?.background ?? "#ffffff",
+                text: template.colors?.text ?? "#111827",
+              }}
+              fonts={{
+                heading: template.fonts?.heading ?? "",
+                body: template.fonts?.body ?? "",
+              }}
             />
           </CardContent>
         </Card>

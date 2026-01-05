@@ -253,7 +253,7 @@ export function MinimalClean() {
               </div>
               <button
                 className="text-gray-400 hover:text-gray-600"
-                onClick={() => navigator.clipboard.writeText(profile.email)}
+                onClick={() => navigator.clipboard.writeText(profile.email ?? "")}
               >
                 <Copy size={16} />
               </button>
@@ -267,7 +267,7 @@ export function MinimalClean() {
               </div>
               <button
                 className="text-gray-400 hover:text-gray-600"
-                onClick={() => navigator.clipboard.writeText(profile.phone)}
+                onClick={() => navigator.clipboard.writeText(profile.phone ?? "")}
               >
                 <Copy size={16} />
               </button>

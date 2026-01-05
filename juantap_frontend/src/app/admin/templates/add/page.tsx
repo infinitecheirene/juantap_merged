@@ -318,7 +318,7 @@ export default function AddTemplatePage() {
                     <Select
                       value={template.category}
                       onValueChange={(value) => {
-                        updateTemplate("category", value);
+                        updateTemplate("category", value as "free" | "premium");
                         updateTemplate("is_premium", value === "premium");
                       }}
                     >
@@ -335,7 +335,7 @@ export default function AddTemplatePage() {
                     <Label className="mb-1" htmlFor="layout">Layout</Label>
                     <Select
                       value={template.layout}
-                      onValueChange={(value) => updateTemplate("layout", value)}
+                      onValueChange={(value) => updateTemplate("layout", value as "minimal" | "modern" | "creative" | "professional" | "artistic") }
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -415,7 +415,7 @@ export default function AddTemplatePage() {
                     <Select
                       value={template.socialStyle}
                       onValueChange={(value) =>
-                        updateTemplate("socialStyle", value)
+                        updateTemplate("socialStyle", value as "default" | "circles" | "fullblock")
                       }
                     >
                       <SelectTrigger>
@@ -434,7 +434,7 @@ export default function AddTemplatePage() {
                     <Select
                       value={template.connectStyle}
                       onValueChange={(value) =>
-                        updateTemplate("connectStyle", value)
+                        updateTemplate("connectStyle", value as "grid" | "list" | "compact")
                       }
                     >
                       <SelectTrigger>
@@ -683,7 +683,7 @@ export default function AddTemplatePage() {
                     id="is_popular"
                     checked={template.is_popular}
                     onCheckedChange={(checked) =>
-                      updateTemplate("is_popular", checked)
+                      updateTemplate("is_popular", Boolean(checked))
                     }
                   />
                   <Label htmlFor="is_popular">Mark as Popular</Label>
@@ -693,7 +693,7 @@ export default function AddTemplatePage() {
                     id="is_new"
                     checked={template.is_new}
                     onCheckedChange={(checked) =>
-                      updateTemplate("is_new", checked)
+                      updateTemplate("is_new", Boolean(checked))
                     }
                   />
                   <Label htmlFor="is_new">Mark as New</Label>
@@ -703,7 +703,7 @@ export default function AddTemplatePage() {
                     id="is_premium"
                     checked={template.is_premium}
                     onCheckedChange={(checked) => {
-                      updateTemplate("is_premium", checked);
+                      updateTemplate("is_premium", Boolean(checked));
                       updateTemplate("category", checked ? "premium" : "free");
                     }}
                   />

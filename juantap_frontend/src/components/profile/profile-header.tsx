@@ -86,7 +86,7 @@ export function ProfileHeader({ profile }: ProfileHeaderProps) {
 
           <div className="flex items-center gap-1">
             <Eye className="w-4 h-4" />
-            {profile.viewCount.toLocaleString()} views
+            {(profile.viewCount ?? 0).toLocaleString()} views
           </div>
         </div>
       </div>

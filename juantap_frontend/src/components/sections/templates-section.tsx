@@ -99,7 +99,7 @@ export function TemplatesSection() {
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {pricingPlans.map((plan) => (
-            <PricingCard key={plan.name} {...plan} loadingBtn={loadingBtn} />
+            <PricingCard key={plan.name} {...plan} loadingBtn={loadingBtn ?? undefined} />
           ))}
         </div>
       </div>

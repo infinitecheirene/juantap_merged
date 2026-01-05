@@ -1,6 +1,7 @@
 "use client";
 
 import type { Template } from "@/lib/template-data";
+import type { User } from "@/types/template";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,7 @@ import { toast, Toaster } from "sonner";
 
 interface TemplatePreviewSidebarProps {
   template: Template;
+  user?: User | null;
 }
 
 export function TemplatePreviewSidebar({
@@ -227,9 +229,9 @@ export function TemplatePreviewSidebar({
                   <span className="text-3xl font-bold text-gray-900">
                     ₱{template.price}
                   </span>
-                  {template.originalPrice && (
+                  {template.original_price && (
                     <span className="ml-2 text-xl text-gray-500 line-through">
-                      ₱{template.originalPrice}
+                      ₱{template.original_price}
                     </span>
                   )}
                   <p className="text-sm text-gray-600">One-time payment</p>

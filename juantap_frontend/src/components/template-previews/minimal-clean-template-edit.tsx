@@ -277,12 +277,12 @@ export function MinimalClean({
                     fontFamily: fonts.body, // Added explicit body font to social links
                   }}
                 >
-                  {socialStyle === "circles" ? (
+                  {(socialStyle as string) === "circles" ? (
                     <span style={{ color: colors.accent }}>{icon}</span>
                   ) : (
                     <>
                       <span style={{ color: colors.accent }}>{icon}</span>
-                      {socialStyle !== "circles" && (
+                      {(socialStyle as string) !== "circles" && (
                         <span>{link.username}</span>
                       )}
                     </>

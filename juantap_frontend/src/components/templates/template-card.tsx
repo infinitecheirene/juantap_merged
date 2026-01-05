@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 interface TemplateCardProps {
   template: Template;
-  user?: User;
+  user?: User | null;
 }
 
 export function TemplateCard({ template, user }: TemplateCardProps) {
