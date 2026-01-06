@@ -72,7 +72,7 @@ export function MinimalClean({
     description: "Inter",
   },
   fontSizes = {
-    title: 16,
+    title: 22,
     description: 12,
   },
 }: MinimalCleanProps) {
@@ -459,12 +459,9 @@ export function MinimalClean({
               fontFamily: fonts.description,
             }}
           >
-            <div
-              className="flex items-center gap-2"
-              style={{ color: colors.description }}
-            >
+            <div className="flex items-center gap-2">
               <Mail size={16} style={{ color: colors.icon }} />{" "}
-              {staticProfile.email}
+              <span style={{ color: colors.description }}>{staticProfile.email}</span>
             </div>
             <button
               className="hover:opacity-70"
@@ -500,7 +497,6 @@ export function MinimalClean({
                   className={getSocialLinkClass()}
                   style={{
                     backgroundColor: `${colors.accent}15`,
-                    color: colors.description,
                     fontFamily: fonts.description,
                   }}
                 >
@@ -510,7 +506,7 @@ export function MinimalClean({
                     <>
                       <span style={{ color: colors.icon }}>{icon}</span>
                       {(socialStyle as string) !== "circles" && (
-                        <span>{link.username}</span>
+                        <span style={{ color: colors.description }}>{link.username}</span>
                       )}
                     </>
                   )}

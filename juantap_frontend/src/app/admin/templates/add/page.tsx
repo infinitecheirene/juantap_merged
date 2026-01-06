@@ -82,7 +82,7 @@ const defaultTemplate: TemplateData = {
   features: [],
   colors: { primary: "", secondary: "", accent: "", coverBackground: "", icon: "", background: "", title: "", description: "" },
   fonts: { title: "", description: "" },
-  fontSizes: { title: 16, description: 12 },
+  fontSizes: { title: 22, description: 12 },
   layout: "minimal", // must be one of the allowed values
   tags: [],
   is_popular: false,
@@ -193,7 +193,7 @@ export default function AddTemplatePage() {
     setTemplate((prev) => ({
       ...prev,
       fontSizes: {
-        title: prev.fontSizes?.title ?? 16,
+        title: prev.fontSizes?.title ?? 22,
         description: prev.fontSizes?.description ?? 12,
         [fontKey]: value
       },
@@ -205,11 +205,11 @@ export default function AddTemplatePage() {
     <div className="mb-3">
       <Label>
         {label}
-        <span className="text-xs text-gray-500 ml-2">({template.fontSizes?.[fontKey] || (fontKey === "title" ? 16 : 12)}px)</span>
+        <span className="text-xs text-gray-500 ml-2">({template.fontSizes?.[fontKey] || (fontKey === "title" ? 22 : 12)}px)</span>
       </Label>
 
       <Select
-        value={(template.fontSizes?.[fontKey] || (fontKey === "title" ? 16 : 12)).toString()}
+        value={(template.fontSizes?.[fontKey] || (fontKey === "title" ? 22 : 12)).toString()}
         onValueChange={(value) => updateFontSize(fontKey, Number(value))}
       >
         <SelectTrigger>
